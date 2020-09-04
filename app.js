@@ -126,8 +126,8 @@ countdown__wrapper.addEventListener('click', (e) => {
 		let elementToDelete = e.target.parentElement;
 		if (confirm('Do you want to delete this eventcounter?')) {
 			ui.deleteEventCard(elementToDelete.parentElement); // delete the eventcounter from the user interface
-
 			Storage.deletefromLS(elementToDelete.nextElementSibling.textContent); //remove from the localstorage targeting the event_name
+			ui.setMessage('Event deleted successfully', 'green');
 		}
 
 		// console.log(e.target.parentElement.parentElement.nextElementSibling.textContent);
