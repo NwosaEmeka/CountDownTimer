@@ -2,9 +2,6 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 	gap: 1rem;
-	&.expired .expiry__date {
-		display: block;
-	}
 }
 
 .countdown__card {
@@ -43,5 +40,8 @@
 		text-transform: uppercase;
 		font-size: 0.7rem;
 		display: none;
+	}
+	&.expired .expiry__date {
+		display: block;
 	}
 }

@@ -81,10 +81,6 @@ body {
   gap: 1rem;
 }
 
-.countdown__wrapper.expired .expiry__date {
-  display: block;
-}
-
 .countdown__card {
   position: relative;
   padding: 1rem 0.5rem;
@@ -125,5 +121,9 @@ body {
   text-transform: uppercase;
   font-size: 0.7rem;
   display: none;
+}
+
+.countdown__card.expired .expiry__date {
+  display: block;
 }
 /*# sourceMappingURL=main.css.map */
