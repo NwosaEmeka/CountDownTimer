@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords"
+    content="Countdown Timer, Countdown,Online Countdown,free online countdown, free flash countdown, large countdown, countdown timer, online countdown timer, free countdown timer" />
+  <meta name="description"
+    content="A free to use online countdown timer for all your events." />
+  <meta name="author" content="Nwosa Emeka Afamefuna" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+    integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="app.js" defer></script>
+  <title>CountDown Timer</title>
+</head>
+<body>
+  <div class="container">
+    <h1 class="content__header">My CountDown Timers</h1>
+    <p class="message"></p>
+    <!-- Register Event -->
+    <form id="form__group">
+      <div class="form__item">
+        <label for="event_name">Event Name</label>
+        <input type="text" name="event_name" id="event_name" class="form__input">
+      </div>
+      <div class="form__item">
+        <label for="event_date">Event Date</label>
+        <input type="datetime-local" name="event_date" id="event_date" class="form__input">
+      </div>
+      <button type="submit"class="form__input add__btn">Add Event</button>
+    </form>
+    <!-- Display countdowns -->
+    <div class="countdown__wrapper">
+      <!-- <div class="countdown__card">
+        <a href="#">
+          <i aria-hidden="true" class="far fa-times-circle delete__card"></i>
+        </a>
+        <h2 class="name">School openning</h2>
+        <span class="expiry__date">expired</span>
+        <div class="countdown__timmer">
+          <div class="countdown__el">
+            <p class="text-lg" id=days>0</p>
+            <span>Days</span>
+          </div>
+          <div class="countdown__el">
+            <p class="text-lg" id="hours">0</p>
+            <span>Hours</span>
+          </div>
+          <div class="countdown__el">
+            <p class="text-lg" id="mins">0</p>
+            <span>Mins</span>
+          </div>
+          <div class="countdown__el">
+            <p class="text-lg" id="seconds">0</p>
+            <span>Seconds</span>
+          </div>
+        </div>
+      </div> -->
+      
+    </div>
+  </div>
+</body>
+</html>   
