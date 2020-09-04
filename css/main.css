@@ -7,7 +7,7 @@
 }
 
 body {
-  background: url("/images/bg-img.jpg") no-repeat center center/cover;
+  background: url("../images/bg-img.jpg") no-repeat center center/cover;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: #fafafa;
