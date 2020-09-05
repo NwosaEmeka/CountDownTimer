@@ -21,13 +21,13 @@ class UI {
 		//update the countdown every 1 second
 		const updateTimeInterval = setInterval(countdown, 1000);
 		function countdown() {
-			const time = updateCounter(event_date); // function to get the updated time
-			const { days, hours, mins, secs } = time; //destructuring of object
-			div.innerHTML = addToDiv(days, hours, mins, secs, name);
+			// const time = updateCounter(event_date); // function to get the updated time
+			const { total, days, hours, mins, secs } = updateCounter(event_date); //destructuring of object
+			div.innerHTML = addToDiv(days, hours, mins, secs, name, event_date);
 
-			if (time.total <= 0) {
+			if (total <= 0) {
 				div.classList.add('expired');
-				div.innerHTML = addToDiv(0, 0, 0, 0, name);
+				div.innerHTML = addToDiv(0, 0, 0, 0, name, event_date);
 				clearInterval(updateTimeInterval);
 			}
 		}
@@ -137,7 +137,7 @@ countdown__wrapper.addEventListener('click', (e) => {
 //Functions
 
 //Add the countdown time to the countdown card
-function addToDiv(days, hours, mins, secs, name) {
+function addToDiv(days, hours, mins, secs, name, due_date) {
 	return `<a href="#">
         <i aria-hidden="true" class="far fa-times-circle delete__card"></i>
       </a>
@@ -160,7 +160,8 @@ function addToDiv(days, hours, mins, secs, name) {
           <p class="text-lg" id="seconds">${format(secs)}</p>
           <span>Seconds</span>
         </div>
-      </div>
+			</div>
+			<span class="due__date">Due Date and time: ${due_date.slice(0, 10)} ${due_date.slice(11)}</span>
 		`;
 }
 //get the countdown time every second
@@ -184,3 +185,11 @@ function updateCounter(date) {
 function format(time) {
 	return time < 10 ? `0${time}` : time;
 }
+
+// service worker
+// if ('serviceWorker' in navigator) {
+// 	navigator.serviceWorker
+// 		.register('/sw.js')
+// 		.then((res) => console.log('Service worker registered', res.scope))
+// 		.catch((err) => console.log('Service worker registeration unsucessful'));
+// }
