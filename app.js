@@ -13,7 +13,7 @@ class Event {
 //User interface
 class UI {
 	displayEvents(myevent) {
-		const event_date = myevent.event_time;
+		const due_time = myevent.event_time;
 		const name = myevent.event_name;
 		const div = document.createElement('div');
 		div.className = 'countdown__card';
@@ -22,12 +22,12 @@ class UI {
 		const updateTimeInterval = setInterval(countdown, 1000);
 		function countdown() {
 			// const time = updateCounter(event_date); // function to get the updated time
-			const { total, days, hours, mins, secs } = updateCounter(event_date); //destructuring of object
-			div.innerHTML = addToDiv(days, hours, mins, secs, name, event_date);
+			const { totalMilliseconds, days, hours, mins, secs } = updateCounter(due_time); //destructuring of object
+			div.innerHTML = addToDiv(days, hours, mins, secs, name, due_time);
 
-			if (total <= 0) {
+			if (totalMilliseconds <= 0) {
 				div.classList.add('expired');
-				div.innerHTML = addToDiv(0, 0, 0, 0, name, event_date);
+				div.innerHTML = addToDiv(0, 0, 0, 0, name, due_time);
 				clearInterval(updateTimeInterval);
 			}
 		}
@@ -44,11 +44,11 @@ class UI {
 			messageDiv.textContent = '';
 		}, 3000);
 	}
-	clearInput() {
+	clearUserInput() {
 		document.getElementById('event_name').value = '';
 		document.getElementById('event_date').value = '';
 	}
-	deleteEventCard(eventCard) {
+	deleteEventFromUI(eventCard) {
 		eventCard.remove();
 	}
 }
@@ -73,7 +73,7 @@ class Storage {
 			ui.displayEvents(event);
 		});
 	}
-	static deletefromLS(eventNameToDelete) {
+	static deleteEventFromLS(eventNameToDelete) {
 		let events = Storage.getEventfromLS();
 		events.forEach((event, index) => {
 			if (event.event_name === eventNameToDelete) {
@@ -108,25 +108,25 @@ form.addEventListener('submit', (e) => {
 	} else {
 		let myevent = new Event(event_name, event_date);
 
-		ui.displayEvents(myevent); // add to interface
+		ui.displayEvents(myevent);
 
-		Storage.addToLS(myevent); // add the event to local storage
-		// message on successful addition
+		Storage.addToLS(myevent);
+
 		ui.setMessage('Your event has been added successfully', 'green');
-		ui.clearInput();
+		ui.clearUserInput();
 	}
 });
 
 //add eventlistener to the card and use event delegation to delete an event counter,
-//it is assumed that each eventcounter will have a unique name, the deletion will be based on eventcounter name.
+// the deletion will be based on eventcounter name.
 
 countdown__wrapper.addEventListener('click', (e) => {
 	// console.log(e.target);
 	if (e.target.classList.contains('delete__card')) {
 		let elementToDelete = e.target.parentElement;
 		if (confirm('Do you want to delete this eventcounter?')) {
-			ui.deleteEventCard(elementToDelete.parentElement); // delete the eventcounter from the user interface
-			Storage.deletefromLS(elementToDelete.nextElementSibling.textContent); //remove from the localstorage targeting the event_name
+			ui.deleteEventFromUI(elementToDelete.parentElement); // delete the eventcounter from the user interface
+			Storage.deleteEventFromLS(elementToDelete.nextElementSibling.textContent); //remove from the localstorage targeting the event_name
 			ui.setMessage('Event deleted successfully', 'green');
 		}
 
@@ -166,15 +166,15 @@ function addToDiv(days, hours, mins, secs, name, due_date) {
 }
 //get the countdown time every second
 function updateCounter(date) {
-	const total = Date.parse(date) - Date.parse(new Date());
-	const totalSeconds = total / 1000;
+	const totalMilliseconds = Date.parse(date) - Date.parse(new Date());
+	const totalSeconds = totalMilliseconds / 1000;
 	const secs = Math.floor(totalSeconds % 60);
 	const mins = Math.floor((totalSeconds / 60) % 60);
 	const hours = Math.floor((totalSeconds / 3600) % 24);
 	const days = Math.floor(totalSeconds / 3600 / 24);
 
 	return {
-		total,
+		totalMilliseconds,
 		days,
 		hours,
 		mins,
